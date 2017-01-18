@@ -72,7 +72,7 @@ class heroesView extends Component {
     renderComic(comic) {
         return (
             <TouchableHighlight style={styles.row}>
-                <Image source={{uri: comic.thumbnail.path+'.jpg'}} style={styles.backgroundImage}>
+                <Image source={{uri: comic.thumbnail.path.replace(/^http:\/\//i, 'https://')+'.jpg'}} style={styles.backgroundImage}>
                     <View style={styles.rightContainer}>
                         <Text style={styles.title}>{comic.name}</Text>
                         <Text style={styles.available}>{comic.available}</Text>
