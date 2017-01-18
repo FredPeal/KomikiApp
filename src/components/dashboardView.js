@@ -10,6 +10,8 @@ import {
 
 var Crypto = require('crypto-js');
 
+var marvel = require('./claves.js');    // Revisa el fichero claves-ejemplo.js
+
 // Importamos nuestra vista de detalle
 const KomikiDetail = require('./komikiDetailView');
 
@@ -20,8 +22,8 @@ class dashboardView extends Component {
     constructor(props) {
         super(props)
         this.timestamp = Date.now();
-        this.public_key = 'PUBLICA';
-        this.private_key = 'PRIVADA';
+        this.public_key = marvel.CLAVE_PUBLICA;
+        this.private_key = marvel.CLAVE_PRIVADA;
         // Propiedades que creamos en nuestro componente
         // La primera es un poco especial porque invocamos el DataSource de ListView
         this.state = {

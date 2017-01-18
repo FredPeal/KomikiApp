@@ -11,14 +11,16 @@ import {
 
 var Crypto = require('crypto-js');
 
+var marvel = require('./claves.js');    // Revisa el fichero claves-ejemplo.js
+
 const REQUEST_URL = "https://gateway.marvel.com:443/v1/public/characters";
 
 class heroesView extends Component {
     constructor(props) {
         super(props)
         this.timestamp = Date.now();
-        this.public_key = 'PUBLICA';
-        this.private_key = 'PRIVADA';
+        this.public_key = marvel.CLAVE_PUBLICA;
+        this.private_key = marvel.CLAVE_PRIVADA;
         // Propiedades que creamos en nuestro componente
         // La primera es un poco especial porque invocamos el DataSource de ListView
         this.state = {
@@ -41,7 +43,7 @@ class heroesView extends Component {
     fetchData() {
         var hash = Crypto.MD5(this.timestamp + this.private_key + this.public_key);
 
-        fetch(REQUEST_URL + '?ts=' + this.timestamp + '&apikey=' + this.public_key + '&hash=' + hash)
+        fetch(REQUEST_URL + '?ts=' + this.timestamp + '&apikey=' + this.public_key + '&hash=' + hash + '&offset=100')
         // Una vez obtengamos respuesta...
         // La convertimos a json
             .then((response) => response.json())
